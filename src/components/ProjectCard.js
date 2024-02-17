@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ProjectDetailsModal from './ProjectDetailsModal';
 import FilterBar from './FilterBar';
+import RecentUpdatesFeed from './RecentUpdatesFeed';
+
 
 const Card = styled.div`
   /* Styles for project card */
 `;
 
-const ProjectCard = ({ project, onDonate, filters, onFilterChange }) => {
+const ProjectCard = ({ project, onDonate, filters, onFilterChange, updates }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleDonateClick = () => {
@@ -37,6 +39,8 @@ const ProjectCard = ({ project, onDonate, filters, onFilterChange }) => {
         />
       )}
             <FilterBar filters={filters} onFilterChange={onFilterChange} />
+            <RecentUpdatesFeed updates={updates} />
+
 
     </Card>
   );
