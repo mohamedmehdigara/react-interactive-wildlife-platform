@@ -1,6 +1,7 @@
 // components/DonationForm.js
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import DonationProgressBar from './DonationProgressBar';
 
 const Form = styled.form`
   /* Styles for donation form */
@@ -62,6 +63,10 @@ const DonationForm = () => {
     setError('');
   };
 
+  // Assuming targetAmount is provided somehow (hardcoded for demonstration)
+  const targetAmount = 1000; // Example: target amount of the project
+  const progress = formData.amount ? (formData.amount / targetAmount) * 100 : 0;
+
   return (
     <Form onSubmit={handleSubmit}>
       <Input 
@@ -87,6 +92,8 @@ const DonationForm = () => {
       />
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <Button type="submit">Donate Now</Button>
+      {/* Render the DonationProgressBar with calculated progress */}
+      <DonationProgressBar progress={progress} />
     </Form>
   );
 };

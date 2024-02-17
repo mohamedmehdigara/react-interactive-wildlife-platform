@@ -1,55 +1,43 @@
 // components/ProjectCard.js
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import ProjectDetailsModal from './ProjectDetailsModal';
+import FilterBar from './FilterBar';
 
 const Card = styled.div`
   /* Styles for project card */
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
 `;
 
-const Title = styled.h2`
-  /* Styles for project title */
-  margin-bottom: 10px;
-`;
+const ProjectCard = ({ project, onDonate, filters, onFilterChange }) => {
+  const [showModal, setShowModal] = useState(false);
 
-const Description = styled.p`
-  /* Styles for project description */
-  margin-bottom: 15px;
-`;
-
-const DonateButton = styled.button`
-  /* Styles for donate button */
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
-const ProjectCard = ({ project, onDonate }) => {
   const handleDonateClick = () => {
     onDonate(project.targetAmount, project.id);
   };
 
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <Card>
-      <Title>{project.name}</Title>
-      <Description>{project.description}</Description>
-      <DonateButton onClick={handleDonateClick}>Donate</DonateButton>
+      <h2>{project.name}</h2>
+      <p>{project.description}</p>
+      <button onClick={handleDonateClick}>Donate</button>
+      <button onClick={handleShowModal}>Details</button>
+      {/* Render the modal when showModal is true */}
+      {showModal && (
+        <ProjectDetailsModal 
+          project={project} 
+          onClose={handleCloseModal} 
+        />
+      )}
+            <FilterBar filters={filters} onFilterChange={onFilterChange} />
+
     </Card>
   );
 };
