@@ -1,12 +1,9 @@
 // components/Header.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-
-
-const Header = () => {
-  const StyledHeader = styled.header`
+const StyledHeader = styled.header`
   /* Styles for header */
   background-color: #007bff;
   color: #fff;
@@ -20,21 +17,38 @@ const Logo = styled.h1`
   margin: 0;
 `;
 
-const NavLink = styled(Link)`
+const Navigation = styled.nav`
+  /* Styles for navigation */
+  margin-top: 20px;
+`;
+
+const StyledLink = styled(NavLink)`
   /* Styles for navigation links */
   color: #fff;
   text-decoration: none;
   margin: 0 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &.active {
+    background-color: #0056b3;
+  }
 `;
+
+const Header = () => {
   return (
     <StyledHeader>
       <Logo>Wildlife Conservation Platform</Logo>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/projects">Projects</Link>
-        <Link to="/about">About</Link>
-        <Link to="/contact">Contact</Link>
-      </nav>
+      <NavLink>
+        <Link exact to="/" activeClassName="active">Home</Link>
+        <Link to="/projects" activeClassName="active">Projects</Link>
+        <Link to="/about" activeClassName="active">About</Link>
+        <Link to="/contact" activeClassName="active">Contact</Link>
+      </NavLink>
     </StyledHeader>
   );
 };
