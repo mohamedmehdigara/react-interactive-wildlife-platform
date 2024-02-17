@@ -1,8 +1,12 @@
 // components/Header.js
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledHeader = styled.header`
+
+
+const Header = () => {
+  const StyledHeader = styled.header`
   /* Styles for header */
   background-color: #007bff;
   color: #fff;
@@ -16,17 +20,20 @@ const Logo = styled.h1`
   margin: 0;
 `;
 
-const Header = () => {
+const NavLink = styled(Link)`
+  /* Styles for navigation links */
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+`;
   return (
     <StyledHeader>
       <Logo>Wildlife Conservation Platform</Logo>
       <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
+        <Link to="/">Home</Link>
+        <Link to="/projects">Projects</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
       </nav>
     </StyledHeader>
   );
